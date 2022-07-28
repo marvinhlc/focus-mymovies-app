@@ -6,7 +6,7 @@ import { store } from './store/store';
 
 function App() {
   return (
-   <Provider store={store}>
+   //<Provider store={store}>
     <div>
       <BrowserRouter>
         <Routes>
@@ -14,7 +14,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-   </Provider>
+   //</Provider>
   );
 }
 
