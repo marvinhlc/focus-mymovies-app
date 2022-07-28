@@ -1,4 +1,9 @@
-# NPM
+npm i redux
+
 npm install @reduxjs/toolkit
 
 npm i redux-thunk
+
+npm i react-router-dom
+
+npm install @mui/material @emotion/react @emotion/styled
