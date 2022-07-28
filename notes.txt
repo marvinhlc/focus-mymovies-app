@@ -1,0 +1,4 @@
+# NPM
+npm install @reduxjs/toolkit
+
+npm i redux-thunk
