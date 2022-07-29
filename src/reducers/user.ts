@@ -2,19 +2,20 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import { User as UserType } from "../types/User";
 
+export const TOKEN_MOVIES = "tokenMyMovies";
 const url:string = "https://reqres.in/api/login";
-const initialState = () => ({
-    token: {valor:""}
-})
 
 export interface TokenState {
     valor:String;
 }
 
+const initialState = () => ({
+    token: {valor:localStorage.getItem(TOKEN_MOVIES)}
+})
+
 export const getSessionToken = createAsyncThunk(
     "token/getSessionToken",
     async (user:UserType) => {
-        //console.log('user-from->',user);
         const payload = {
             email:user.email,
             password:user.password
@@ -28,7 +29,6 @@ export const getSessionToken = createAsyncThunk(
         };
         const response = await fetch(url,config);
         const data = await response.json();
-        //console.log('response->',data)
         return data;
     }
 );
@@ -39,11 +39,9 @@ export const userSlice = createSlice({
     reducers:{},
     extraReducers: (builder) => {
         builder.addCase(getSessionToken.pending, (state,action) => {
-            console.log('pending->',action.payload)
             state.valor = "";
         });
         builder.addCase(getSessionToken.fulfilled, (state,action) => {
-            console.log('fulfilled->',action.payload)
             const {token,error} = action.payload;
             if(error === 'user not found')
                 state.valor = '';
@@ -51,11 +49,10 @@ export const userSlice = createSlice({
                 state.valor = token;
         });
         builder.addCase(getSessionToken.rejected, (state,action) => {
-            console.log('rejected->',action.payload)
             state.valor = "";
-        })
+        });
     }
 });
 
-export const selectUser = (state:RootState) => state.token;
+export const selectToken = (state:RootState) => state.token;
 export default userSlice.reducer;
