@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
+import userReducer from '../reducers/user'
 
 export const store = configureStore({
     reducer:{
-        movies:() => console.log('movies...')
+        token:userReducer,
     }
 });
 
