@@ -12,15 +12,16 @@ export const Home: React.FC = () => {
 
     useEffect(() => {
         console.log('token->',token)
-    },[]);
+    },[token]);
 
+    /*
     const handleOnLogin = () => {
         console.log('login...')
-    }
+    }*/
 
-    if(token.valor === ''){
+    if(token.valor === '' || token.valor === undefined){
         return (
-            <Login onLogin={handleOnLogin} />
+            <Login />
         )
     }
 

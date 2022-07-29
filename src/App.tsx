@@ -6,15 +6,17 @@ import { store } from './store/store';
 
 function App() {
   return (
-   <Provider store={store}>
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-        </Routes>
-      </BrowserRouter>
-    </div>
-   </Provider>
+    <div className="App">
+      <header className="App-header">
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />}/>
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </header>
+   </div>
   );
 }
 
