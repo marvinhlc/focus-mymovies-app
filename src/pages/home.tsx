@@ -12,7 +12,6 @@ import { selectFavoritesMovies } from "../reducers/favorites";
 
 export const Home: React.FC = () => {
     const [tokenSession,setTokenSession] = useState<null | String>(null);
-    //const [moviesTrending,setMoviesTrending] = useState<Movies>();
 
     const dispatch = useAppDispatch();
     const token = useAppSelector(selectToken);
@@ -26,7 +25,7 @@ export const Home: React.FC = () => {
 
     useEffect(() => {
         setTokenSession(token.valor);
-        //console.log('trending-session->',trending)
+        console.log('trending->',trending)
         console.log('favorites->',favorites)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[trending,favorites]);
