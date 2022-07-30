@@ -14,6 +14,15 @@
 }
 
 .App-header {
+  background-color: #ececec;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: rgb(61, 61, 61);
+}
+
+.App-header2 {
   background-color: #3d5381;
   min-height: 100vh;
   display: flex;

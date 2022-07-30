@@ -45,8 +45,10 @@ export const userSlice = createSlice({
             const {token,error} = action.payload;
             if(error === 'user not found')
                 state.valor = '';
-            else
+            else{
                 state.valor = token;
+                localStorage.setItem(TOKEN_MOVIES,token);
+            }
         });
         builder.addCase(getSessionToken.rejected, (state,action) => {
             state.valor = "";

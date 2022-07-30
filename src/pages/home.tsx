@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from "react";
-import {Box,Typography} from "@mui/material";
+import './home.css'
+import {Box} from "@mui/material";
 import { useAppSelector } from "../store/store";
-import { selectToken, TOKEN_MOVIES} from "../reducers/user";
+import { selectToken} from "../reducers/user";
 import Login from "../components/Login";
+import Topbar from "../components/Topbar";
+import { getTrendingMovies, selectMoviesTrending } from "../reducers/trending";
+import { useAppDispatch } from '../store/store';
 
 export const Home: React.FC = () => {
     const [tokenSession,setTokenSession] = useState<null | String>(null);
+    //const [moviesTrending,setMoviesTrending] = useState<Movies>();
+
+    const dispatch = useAppDispatch();
     const token = useAppSelector(selectToken);
+    const trending = useAppSelector(selectMoviesTrending);
 
     useEffect(() => {
-        const tokenlocal = localStorage.getItem(TOKEN_MOVIES);
-        setTokenSession(tokenlocal);
+        dispatch(getTrendingMovies());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     useEffect(() => {
-        console.log('token->',token)
         setTokenSession(token.valor);
-        localStorage.setItem(TOKEN_MOVIES,token.valor.toString());
-    },[token]);
+        console.log('trending-session->',trending)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[trending]);
 
     //Si el tokenSession esta vacio o indefinido llamamos a Login
-    if(tokenSession === '' || tokenSession === undefined){
+    if(tokenSession === '' || tokenSession === undefined || tokenSession === null){
         return (
-            <Login />
+            <Box className="ContenedorLogin">
+                <Login />
+            </Box>
         )
     }
 
     return (
-        <Box>
-            <Typography variant="h5">
-                HOME PAGE
-            </Typography>
+        <Box className="ContenedorHome">
+            <Topbar />
         </Box>
     );
 };

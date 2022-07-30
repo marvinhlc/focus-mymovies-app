@@ -4,14 +4,8 @@ import { Box } from "@mui/system";
 import React from "react";
 import {useForm, SubmitHandler} from "react-hook-form"
 import {getSessionToken} from "../reducers/user"
-import { useDispatch } from 'react-redux';
 import {User as UserType} from '../types/User'
 import { useAppDispatch } from '../store/store';
-//import { useAppSelector } from '../store/store';
-
-type Props = {
-    onLogin: () => void;
-}
 
 function Login() {
 
@@ -23,12 +17,11 @@ function Login() {
     } = useForm<UserType>();
 
     const handleOnSubmit:SubmitHandler<UserType> = (data:UserType) => {
-        console.log('submit..', data);
         dispatch(getSessionToken(data));
     };
 
     return (
-        <div className='contenedor'>
+        <div>
             <CssBaseline />
             <form onSubmit={handleSubmit(handleOnSubmit)}>
                 <Box className="loginBox">

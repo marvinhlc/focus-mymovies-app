@@ -9,3 +9,13 @@ npm i react-router-dom
 npm install @mui/material @emotion/react @emotion/styled
 
 npm install react-hook-form
+
+npm i @mui/icons-material
+
+npm install @material-ui/icons
+
+API KEY
+67827dade2847df4df3fa8f7f2a00f55
+
+API KEY AUTH 4
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzgyN2RhZGUyODQ3ZGY0ZGYzZmE4ZjdmMmEwMGY1NSIsInN1YiI6IjYyZTQ2YmZlNGY5YTk5MDA2ZDM0ODg4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZK0eG5n1jJCzGGuVkPvVk7LtNGRFppkdOqTYBOke0uU

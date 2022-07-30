@@ -1,0 +1,7 @@
+GET https://api.themoviedb.org/3/movie/550?api_key=67827dade2847df4df3fa8f7f2a00f55
+
+###
+GET https://api.themoviedb.org/3/discover/movie/?api_key=67827dade2847df4df3fa8f7f2a00f55
+
+###
+GET https://api.themoviedb.org/3/trending/all/week?api_key=67827dade2847df4df3fa8f7f2a00f55
