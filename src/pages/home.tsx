@@ -7,6 +7,8 @@ import Login from "../components/Login";
 import Topbar from "../components/Topbar";
 import { getTrendingMovies, selectMoviesTrending } from "../reducers/trending";
 import { useAppDispatch } from '../store/store';
+import Movieslist from "../components/Movieslist";
+import { selectFavoritesMovies } from "../reducers/favorites";
 
 export const Home: React.FC = () => {
     const [tokenSession,setTokenSession] = useState<null | String>(null);
@@ -15,6 +17,7 @@ export const Home: React.FC = () => {
     const dispatch = useAppDispatch();
     const token = useAppSelector(selectToken);
     const trending = useAppSelector(selectMoviesTrending);
+    const favorites = useAppSelector(selectFavoritesMovies);
 
     useEffect(() => {
         dispatch(getTrendingMovies());
@@ -23,9 +26,10 @@ export const Home: React.FC = () => {
 
     useEffect(() => {
         setTokenSession(token.valor);
-        console.log('trending-session->',trending)
+        //console.log('trending-session->',trending)
+        console.log('favorites->',favorites)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[trending]);
+    },[trending,favorites]);
 
     //Si el tokenSession esta vacio o indefinido llamamos a Login
     if(tokenSession === '' || tokenSession === undefined || tokenSession === null){
@@ -39,6 +43,9 @@ export const Home: React.FC = () => {
     return (
         <Box className="ContenedorHome">
             <Topbar />
+            <div className="Workzone">
+                <Movieslist />
+            </div>
         </Box>
     );
 };

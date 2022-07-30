@@ -33,7 +33,7 @@ export const trendingSlice = createSlice({
             state.list = [];
         });
         builder.addCase(getTrendingMovies.fulfilled, (state,action) => {
-            const {page,results} = action.payload;
+            const {results} = action.payload;
             state.list = results;
         });
         builder.addCase(getTrendingMovies.rejected, (state,action) => {
