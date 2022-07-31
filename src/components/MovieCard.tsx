@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Movies as MoviesType} from "../types/Movies"
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,29 +7,36 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/material";
-//import { useAppDispatch } from '../store/store';
-//import {addToFavorites} from "../reducers/favorites";
 import { useDispatch } from "react-redux";
-//import { useAppSelector } from "../store/store";
-//import {selectFavoritesMovies} from "../reducers/favorites"
-import {addToFavorites} from "../reducers/favorites";
 import {addAsSelected} from "../reducers/details"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
     item:MoviesType;
+    onAddToFavorites:() => void;
+    onRemoveFromFavorites: () => void;
 };
 
 const POSTER_PATH_BASE = "https://image.tmdb.org/t/p/w500/";
 
-const MovieCard:React.FC<Props> = ({item}) => {
-
+const MovieCard:React.FC<Props> = ({item,onAddToFavorites,onRemoveFromFavorites}) => {
+    const [favoritos,setFavoritos] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const page = useLocation();
+
+    useEffect(() => {
+        //console.log(page)
+        setFavoritos(page.pathname === '/favorites')
+    },[])
 
     const handleOnFavoritos = () => {
-        //console.log('favoritos...',item)
-        dispatch(addToFavorites(item));
+        //console.log('favoritos...',favoritos)
+        if(favoritos === false){
+            onAddToFavorites()
+        }else{
+            onRemoveFromFavorites()
+        }
     }
 
     const handleOnGotoDetails = () => {
@@ -62,7 +69,12 @@ const MovieCard:React.FC<Props> = ({item}) => {
                     </Box>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={handleOnFavoritos}>Agregar a Favoritos</Button>
+                    <Button size="small" onClick={handleOnFavoritos}>
+                        {favoritos === true
+                        ? 'Quitar de favoritos'
+                        : 'Agregar a Favoritos'
+                        }
+                    </Button>
                     <Button size="small" onClick={handleOnGotoDetails}>Ver mas</Button>
                 </CardActions>
             </Card>

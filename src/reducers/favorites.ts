@@ -34,7 +34,9 @@ export const favoritesSlice = createSlice({
         },
         removeFromFavorites: (state, action:PayloadAction<MoviesType>) => {
             let tempo = state.list.filter((reg) => {
-                if(reg.id !== action.payload.id) return reg;
+                if(reg.id !== action.payload.id){
+                     return reg;
+                }
             })
             localStorage.setItem(FAVORITES_MOVIES, JSON.stringify(tempo))
         },

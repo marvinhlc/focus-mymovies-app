@@ -5,20 +5,15 @@ import { useAppSelector } from "../store/store";
 import { selectToken} from "../reducers/user";
 import Login from "../components/Login";
 import Topbar from "../components/Topbar";
-import { getTrendingMovies, selectMoviesTrending } from "../reducers/trending";
+import { getTrendingMovies } from "../reducers/trending";
 import { useAppDispatch } from '../store/store';
 import Movieslist from "../components/Movieslist";
-import { selectFavoritesMovies } from "../reducers/favorites";
-import { selectMovieSelected } from "../reducers/details";
 
 export const Home: React.FC = () => {
     const [tokenSession,setTokenSession] = useState<null | String>(null);
 
     const dispatch = useAppDispatch();
     const token = useAppSelector(selectToken);
-    const trending = useAppSelector(selectMoviesTrending);
-    const favorites = useAppSelector(selectFavoritesMovies);
-    const movie = useAppSelector(selectMovieSelected);
 
     useEffect(() => {
         dispatch(getTrendingMovies());
@@ -26,13 +21,10 @@ export const Home: React.FC = () => {
     },[]);
 
     useEffect(() => {
+        console.log('token->',token.valor)
         setTokenSession(token.valor);
-        //console.log('trending->',trending)
-        //console.log('favorites->',favorites)
-        console.log('selected->',movie.selected)
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[trending,favorites,movie]);
+    },[token]);
 
     //Si el tokenSession esta vacio o indefinido llamamos a Login
     if(tokenSession === '' || tokenSession === undefined || tokenSession === null){
@@ -47,7 +39,7 @@ export const Home: React.FC = () => {
         <Box>
             <Topbar />
             <div className="Contenedor">
-                <Movieslist />
+                <Movieslist origen="trending" />
             </div>
         </Box>
     );

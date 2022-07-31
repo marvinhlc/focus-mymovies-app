@@ -36,7 +36,13 @@ export const getSessionToken = createAsyncThunk(
 export const userSlice = createSlice({
     name:"token",
     initialState: initialState().token as TokenState,
-    reducers:{},
+    reducers:{
+        removeToken: (state) => {
+            console.log('remove...')
+            localStorage.removeItem(TOKEN_MOVIES);
+            state.valor = "";
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getSessionToken.pending, (state,action) => {
             state.valor = "";
@@ -56,5 +62,6 @@ export const userSlice = createSlice({
     }
 });
 
+export const {removeToken} = userSlice.actions;
 export const selectToken = (state:RootState) => state.token;
 export default userSlice.reducer;

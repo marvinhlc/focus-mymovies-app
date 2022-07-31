@@ -5,6 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import {removeToken} from '../reducers/user';
+import { useAppDispatch } from '../store/store';
 
 export const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -19,7 +23,7 @@ export const Search = styled('div')(({ theme }) => ({
       //marginLeft: theme.spacing(1),
       marginLeft:'auto',
       marginRight:'auto',
-      width: '50%',
+      width: '40%',
     },
   }));
   
@@ -52,8 +56,28 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Topbar(){
 
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const handleOnTextChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value);
+    }
+
+    const handleOnClickFavoritos = () => {
+      navigate('/favorites');
+    }
+
+    const handleOnClickHome = () => {
+      navigate('/');
+    }
+
+    const handleOnClickLogout = () => {
+      console.log('logout...')
+      dispatch(removeToken());
+    }
+
+    const handleOnClickSearch = () => {
+      console.log('enter...')
     }
 
     return (
@@ -67,7 +91,7 @@ function Topbar(){
             component="div"
             sx={{ display: { xs: 'none', sm: 'block', marginRight:20, } }}
           >
-            MyMovies
+            <Button color="inherit" onClick={handleOnClickHome}>MyMovies</Button>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -77,8 +101,11 @@ function Topbar(){
               placeholder="Buscar movies…"
               inputProps={{ 'aria-label': 'search' }}
               onChange={handleOnTextChange}
+              onClick={handleOnClickSearch}
             />
           </Search>
+          <Button color="inherit" onClick={handleOnClickFavoritos}>Favoritos</Button>
+          <Button color="inherit" onClick={handleOnClickLogout}>Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>

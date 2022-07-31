@@ -4,38 +4,27 @@ import {Box} from "@mui/material";
 import { useAppSelector } from "../store/store";
 import Topbar from "../components/Topbar";
 import { useAppDispatch } from '../store/store';
-import { selectFavoritesMovies, loadFromLocalStorage } from "../reducers/favorites";
-import MoviesFavorites from "../components/MoviesFavorites";
+import { selectFavoritesMovies, loadFromLocalStorage, addToFavorites, removeFromFavorites } from "../reducers/favorites";
 import {Movies as MoviesType} from "../types/Movies";
 import { selectToken} from "../reducers/user";
+import MovieCard from "../components/MovieCard";
+import Movieslist from "../components/Movieslist";
 
 export const Favorites: React.FC = () => {
-    const [movies,setMovies] = useState<MoviesType[]>([]);
     const dispatch = useAppDispatch()
     const favorites = useAppSelector(selectFavoritesMovies);
     const token = useAppSelector(selectToken);
 
     useEffect(() => {
-        //dispatch(getAllFavorites());
         dispatch(loadFromLocalStorage())
-        console.log('favorites->',favorites.list)
-        console.log('token->',token)
-        //setMovies(favorites.list)
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
-
-    useEffect(() => {
-        console.log('favorites->',favorites)
-        setMovies(favorites.list)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[favorites])
 
     return (
         <Box>
             <Topbar />
             <div className="Contenedor">
-                <MoviesFavorites movies={movies} />
+                <Movieslist origen="favorites" />
             </div>
         </Box>
     );

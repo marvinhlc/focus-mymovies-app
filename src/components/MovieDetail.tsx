@@ -26,21 +26,12 @@ type Props = {
 const POSTER_PATH_BASE = "https://image.tmdb.org/t/p/w500/";
 
 const MovieDetail:React.FC<Props> = ({item}) => {
-
     const [expanded,setExpanded] = useState(false);
-
     const dispatch = useAppDispatch();
     const credits = useAppSelector(selectCreditsMovie);
     const suggested = useAppSelector(selectSuggestedMovies);
 
-    useEffect(() => {
-        console.log('expanded->',expanded)
-        console.log('credits->',credits.list)
-        console.log('suggested->',suggested.list)
-    },[expanded,credits])
-
     const handleOnFavoritos = () => {
-        //console.log('favoritos...',item)
         dispatch(removeFromFavorites(item));
     }
 
@@ -64,7 +55,7 @@ const MovieDetail:React.FC<Props> = ({item}) => {
                 </ListItemButton>
     });
 
-    return  <Card sx={{ maxWidth: 520, marginBottom: 2 }}>
+    return  <Card sx={{ maxWidth: 520, marginBottom: 2, marginTop:2 }}>
                 <CardMedia
                     component="img"
                     height="200"
@@ -89,7 +80,7 @@ const MovieDetail:React.FC<Props> = ({item}) => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={handleOnFavoritos}>Quitar de Favoritos</Button>
-                    <Button size="small" onClick={handleOnExpand}>Ver mas</Button>
+                    <Button size="small" onClick={handleOnExpand}>Expandir</Button>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
