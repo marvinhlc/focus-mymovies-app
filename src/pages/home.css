@@ -1,9 +1,11 @@
 .ContenedorHome {
     background-color: #dce1ee;
     min-height: 100vh;
+    height: calc(100vh - 65px);
     display: flex;
     font-size: calc(10px + 2vmin);
     color: rgb(61, 61, 61);
+
 }
 
 .ContenedorLogin {
@@ -21,12 +23,12 @@
   display:flex;
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: calc(96vh - 65px);
   min-height: 380px;
   justify-content: center;
   align-content: center;
-  margin-top: 65px;
+  margin-top: 64px;
   padding-top: 10px;
   padding-bottom: 10px;
-  overflow-y: scroll;
+  overflow: auto;
 }

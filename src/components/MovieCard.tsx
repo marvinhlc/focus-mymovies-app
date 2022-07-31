@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {Movies as MoviesType} from "../types/Movies"
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/material";
@@ -14,6 +13,8 @@ import { useDispatch } from "react-redux";
 //import { useAppSelector } from "../store/store";
 //import {selectFavoritesMovies} from "../reducers/favorites"
 import {addToFavorites} from "../reducers/favorites";
+import {addAsSelected} from "../reducers/details"
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     item:MoviesType;
@@ -21,28 +22,26 @@ type Props = {
 
 const POSTER_PATH_BASE = "https://image.tmdb.org/t/p/w500/";
 
-const MovieDetail:React.FC<Props> = ({item}) => {
+const MovieCard:React.FC<Props> = ({item}) => {
 
-    const [expanded,setExpanded] = useState(false)
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        console.log('expanded->',expanded)
-    },[expanded])
+    const navigate = useNavigate();
 
     const handleOnFavoritos = () => {
         //console.log('favoritos...',item)
         dispatch(addToFavorites(item));
     }
 
-    const handleOnExpand = () => {
-        setExpanded(!expanded);
+    const handleOnGotoDetails = () => {
+        //console.log('selected...',item)
+        dispatch(addAsSelected(item))
+        navigate("/details");
     }
 
-    return  <Card sx={{ maxWidth: 520, marginBottom: 2 }}>
+    return  <Card sx={{ maxWidth: 385, marginBottom: 2 }}>
                 <CardMedia
                     component="img"
-                    height="200"
+                    height="180"
                     image={POSTER_PATH_BASE.concat(item.poster_path)}
                     alt="movie poster"
                 />
@@ -63,23 +62,10 @@ const MovieDetail:React.FC<Props> = ({item}) => {
                     </Box>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={handleOnFavoritos}>Quitar de Favoritos</Button>
-                    <Button size="small" onClick={handleOnExpand}>Ver mas</Button>
+                    <Button size="small" onClick={handleOnFavoritos}>Agregar a Favoritos</Button>
+                    <Button size="small" onClick={handleOnGotoDetails}>Ver mas</Button>
                 </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>
-                            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-                            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-                            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-                            large plate and set aside, leaving chicken and chorizo in the pan. Add
-                            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-                            stirring often until thickened and fragrant, about 10 minutes. Add
-                            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                        </Typography>
-                    </CardContent>
-                </Collapse>
             </Card>
 }
 
-export default MovieDetail;
+export default MovieCard;
