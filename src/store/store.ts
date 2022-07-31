@@ -3,7 +3,9 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import trendingReducer from "../reducers/trending";
 import userReducer from '../reducers/user';
 import favoritesReducer from '../reducers/favorites';
-import detailReducer from '../reducers/details'
+import detailReducer from '../reducers/details';
+import creditsReducer from '../reducers/credits';
+import suggestedReducer from '../reducers/suggested';
 
 export const store = configureStore({
     reducer:{
@@ -11,6 +13,8 @@ export const store = configureStore({
         trending:trendingReducer,
         favorites:favoritesReducer,
         movie:detailReducer,
+        credits:creditsReducer,
+        suggested:suggestedReducer,
     }
 });
 

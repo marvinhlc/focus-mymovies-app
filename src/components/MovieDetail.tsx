@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Movies as MoviesType} from "../types/Movies"
+import {Movies as MoviesType} from "../types/Movies";
+import {Credits as CreditsType} from "../types/Credits";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,13 +8,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box } from "@mui/material";
+import { Box, ListItemButton, ListItemText } from "@mui/material";
 //import { useAppDispatch } from '../store/store';
 //import {addToFavorites} from "../reducers/favorites";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 //import { useAppSelector } from "../store/store";
 //import {selectFavoritesMovies} from "../reducers/favorites"
-import {addToFavorites} from "../reducers/favorites";
+import {addToFavorites,removeFromFavorites} from "../reducers/favorites";
+import {getCreditsMovie, selectCreditsMovie} from "../reducers/credits";
+import {getSuggestedMovies, selectSuggestedMovies} from "../reducers/suggested";
+import { useAppDispatch, useAppSelector } from "../store/store";
 
 type Props = {
     item:MoviesType;
@@ -23,21 +27,42 @@ const POSTER_PATH_BASE = "https://image.tmdb.org/t/p/w500/";
 
 const MovieDetail:React.FC<Props> = ({item}) => {
 
-    const [expanded,setExpanded] = useState(false)
-    const dispatch = useDispatch();
+    const [expanded,setExpanded] = useState(false);
+
+    const dispatch = useAppDispatch();
+    const credits = useAppSelector(selectCreditsMovie);
+    const suggested = useAppSelector(selectSuggestedMovies);
 
     useEffect(() => {
         console.log('expanded->',expanded)
-    },[expanded])
+        console.log('credits->',credits.list)
+        console.log('suggested->',suggested.list)
+    },[expanded,credits])
 
     const handleOnFavoritos = () => {
         //console.log('favoritos...',item)
-        dispatch(addToFavorites(item));
+        dispatch(removeFromFavorites(item));
     }
 
     const handleOnExpand = () => {
         setExpanded(!expanded);
+        if(expanded === false){
+            dispatch(getCreditsMovie(item));
+            dispatch(getSuggestedMovies(item));
+        }
     }
+
+    const RenderCreditsList = credits.list.map((item) => {
+        return <ListItemButton component="a" href="#simple-list">
+                <ListItemText  key={item.cast_id}>{item.name}</ListItemText >
+                </ListItemButton>
+    });
+
+    const RenderSuggestedList = suggested.list.map((item) => {
+        return <ListItemButton component="a" href="#simple-list">
+                <ListItemText  key={item.id}>{item.title}</ListItemText >
+                </ListItemButton>
+    });
 
     return  <Card sx={{ maxWidth: 520, marginBottom: 2 }}>
                 <CardMedia
@@ -68,15 +93,15 @@ const MovieDetail:React.FC<Props> = ({item}) => {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>
-                            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-                            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-                            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-                            large plate and set aside, leaving chicken and chorizo in the pan. Add
-                            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-                            stirring often until thickened and fragrant, about 10 minutes. Add
-                            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+                        <Typography variant="h5" color="text.secondary">
+                            Elenco
                         </Typography>
+                        { RenderCreditsList }
+        
+                        <Typography variant="h5" color="text.secondary">
+                            Recomendaciones
+                        </Typography>
+                        { RenderSuggestedList }
                     </CardContent>
                 </Collapse>
             </Card>

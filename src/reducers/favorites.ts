@@ -32,6 +32,12 @@ export const favoritesSlice = createSlice({
             state.list = tempo;
             localStorage.setItem(FAVORITES_MOVIES, JSON.stringify(state.list))
         },
+        removeFromFavorites: (state, action:PayloadAction<MoviesType>) => {
+            let tempo = state.list.filter((reg) => {
+                if(reg.id !== action.payload.id) return reg;
+            })
+            localStorage.setItem(FAVORITES_MOVIES, JSON.stringify(tempo))
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(loadFromLocalStorage.pending, (state,action) => {
@@ -46,6 +52,6 @@ export const favoritesSlice = createSlice({
     }    
 });
 
-export const {addToFavorites} = favoritesSlice.actions;
+export const {addToFavorites,removeFromFavorites} = favoritesSlice.actions;
 export const selectFavoritesMovies = (state:RootState) => state.favorites;
 export default favoritesSlice.reducer;

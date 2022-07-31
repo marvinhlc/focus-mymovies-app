@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import '../pages/home.css'
 import { selectMoviesTrending } from "../reducers/trending";
@@ -12,9 +13,9 @@ function Movieslist(){
     });
 
     return (
-        <div>
+        <Box sx={{marginTop:2}}>
             { RenderMovies }
-        </div>
+        </Box>
     )
 }
 

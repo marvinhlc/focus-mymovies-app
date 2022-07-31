@@ -32,9 +32,9 @@ export const Favorites: React.FC = () => {
     },[favorites])
 
     return (
-        <Box className="ContenedorHome">
+        <Box>
             <Topbar />
-            <div className="Workzone">
+            <div className="Contenedor">
                 <MoviesFavorites movies={movies} />
             </div>
         </Box>

@@ -12,3 +12,9 @@ GET https://api.themoviedb.org/3/movie/453395?api_key=67827dade2847df4df3fa8f7f2
 
 ###
 GET https://api.themoviedb.org/3/movie/453395?api_key=67827dade2847df4df3fa8f7f2a00f55&append_to_response=credits
+
+###
+GET https://api.themoviedb.org/3/movie/453395?api_key=67827dade2847df4df3fa8f7f2a00f55&append_to_response=credits
+
+###
+GET https://api.themoviedb.org/3/movie/453395/recommendations?api_key=67827dade2847df4df3fa8f7f2a00f55&language=en-US&page=1

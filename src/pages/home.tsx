@@ -44,9 +44,9 @@ export const Home: React.FC = () => {
     }
 
     return (
-        <Box className="ContenedorHome">
+        <Box>
             <Topbar />
-            <div className="Workzone">
+            <div className="Contenedor">
                 <Movieslist />
             </div>
         </Box>
