@@ -94,16 +94,15 @@ function Topbar(){
             <Button color="inherit" onClick={handleOnClickHome}>MyMovies</Button>
           </Typography>
           <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
+           
             <StyledInputBase
               placeholder="Buscar movies…"
               inputProps={{ 'aria-label': 'search' }}
               onChange={handleOnTextChange}
-              onClick={handleOnClickSearch}
             />
+            <Button color="inherit" onClick={handleOnClickSearch}><SearchIcon /></Button>
           </Search>
+          
           <Button color="inherit" onClick={handleOnClickFavoritos}>Favoritos</Button>
           <Button color="inherit" onClick={handleOnClickLogout}>Logout</Button>
         </Toolbar>
