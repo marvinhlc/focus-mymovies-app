@@ -21,7 +21,6 @@ export const Home: React.FC = () => {
     },[]);
 
     useEffect(() => {
-        console.log('token->',token.valor)
         setTokenSession(token.valor);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[token]);

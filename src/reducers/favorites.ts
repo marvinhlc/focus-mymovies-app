@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import { Movies as MoviesType } from "../types/Movies";
+import {config} from '../config'
 
-export const FAVORITES_MOVIES = "favoritesMyMovies";
+export const FAVORITES_MOVIES = config.FAVORITES_MOVIES;
 
 export interface FavoritesState {
     list:MoviesType[]

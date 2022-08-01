@@ -11,6 +11,19 @@
     overflow:hidden;
 }
 
+.Notfound {
+  background-color: #dce1ee;
+  display:flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(61, 61, 61);
+  overflow:hidden;
+}
+
 .ContenedorLogin {
   background-color: #3d5381;
   min-height: 100vh;

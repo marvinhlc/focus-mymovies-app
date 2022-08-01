@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import { User as UserType } from "../types/User";
+import {config} from '../config';
 
-export const TOKEN_MOVIES = "tokenMyMovies";
+export const TOKEN_MOVIES = config.TOKEN_MOVIES;
+
 const url:string = "https://reqres.in/api/login";
 
 export interface TokenState {

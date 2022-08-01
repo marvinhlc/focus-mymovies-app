@@ -6,6 +6,8 @@ import favoritesReducer from '../reducers/favorites';
 import detailReducer from '../reducers/details';
 import creditsReducer from '../reducers/credits';
 import suggestedReducer from '../reducers/suggested';
+import searchingReducer from '../reducers/searching';
+import queryStringReducer from '../reducers/query';
 
 export const store = configureStore({
     reducer:{
@@ -15,6 +17,8 @@ export const store = configureStore({
         movie:detailReducer,
         credits:creditsReducer,
         suggested:suggestedReducer,
+        search:searchingReducer,
+        query:queryStringReducer
     }
 });
 

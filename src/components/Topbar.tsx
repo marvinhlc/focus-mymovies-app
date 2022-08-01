@@ -9,6 +9,9 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import {removeToken} from '../reducers/user';
 import { useAppDispatch } from '../store/store';
+import { searchMovieByTitle } from '../reducers/searching';
+import { useEffect, useState } from 'react';
+import { saveQueryString } from '../reducers/query';
 
 export const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -55,12 +58,12 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }));
 
 function Topbar(){
-
+    const [query,setQuery] =  useState("")
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const handleOnTextChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
+        setQuery(e.target.value)
     }
 
     const handleOnClickFavoritos = () => {
@@ -78,6 +81,9 @@ function Topbar(){
 
     const handleOnClickSearch = () => {
       console.log('enter...')
+      dispatch(saveQueryString(query));
+      dispatch(searchMovieByTitle(query));
+      navigate('/results')
     }
 
     return (

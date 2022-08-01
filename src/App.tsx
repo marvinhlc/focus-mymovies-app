@@ -4,6 +4,8 @@ import './App.css';
 import Details from './pages/details';
 import Favorites from './pages/favorites';
 import Home from './pages/home';
+import NotFound from './pages/notfound';
+import Results from './pages/results';
 import { store } from './store/store';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
               <Route path="/" element={<Home />}/>
               <Route path='/favorites' element={<Favorites />} />
               <Route path='/details' element={<Details />} />
+              <Route path='/results' element={<Results />} />
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </Provider>
