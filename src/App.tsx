@@ -9,12 +9,13 @@ import Results from './pages/results';
 import { store } from './store/store';
 
 function App() {
+
   return (
     <div className="App">
       <header>
         <Provider store={store}>
           <BrowserRouter>
-            <Routes>
+            <Routes>            
               <Route path="/" element={<Home />}/>
               <Route path='/favorites' element={<Favorites />} />
               <Route path='/details' element={<Details />} />
